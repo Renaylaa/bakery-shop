@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Sweet Bakery</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* CSS tambahan untuk mengatur perpindahan halaman/view */
+        .view-section {
+            display: none;
+        }
+        .view-section.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="home-view" class="view-section active">
+        <div class="container">
+            <h1>Sweet Bakery</h1>
+            <p class="subtitle">Fresh, Sweet & Made with Love</p>
+
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Pesanan berhasil ditambahkan!');">
+                <input type="text" name="nama" placeholder="Masukkan Nama Kamu" required>
+
+                <div class="products">
+                    <label class="card">
+                        <img src="images/croissant.jpg" alt="Croissant">
+                        <h3>Croissant</h3>
+                        <p class="price">Rp15.000</p>
+                        <input type="radio" name="produk" value="Croissant" required>
+                        <span>Pilih</span>
+                    </label>
+                    
+                    <label class="card">
+                        <img src="images/cupcake.jpg" alt="Cupcake">
+                        <h3>Cupcake</h3>
+                        <p class="price">Rp10.000</p>
+                        <input type="radio" name="produk" value="Cupcake" required>
+                        <span>Pilih</span>
+                    </label>
+
+                    <label class="card">
+                        <img src="images/brownie.jpg" alt="Brownie">
+                        <h3>Brownie</h3>
+                        <p class="price">Rp25.000</p>
+                        <input type="radio" name="produk" value="Brownie" required>
+                        <span>Pilih</span>
+                    </label>
+                </div>
+
+                <input type="number" name="jumlah" min="1" value="1" required>
+                <br>
+                <button type="submit">Pesan Sekarang</button>
+            </form>
+
+            <a href="#" class="btn-back" onclick="switchView('orders-view'); return false;">Lihat Pesanan</a>
+        </div>
+    </div>
+
+    <div id="orders-view" class="view-section">
+        <div class="container">
+            <h1>Daftar Pesanan</h1>
+            <p class="subtitle">Sweet Bakery Orders</p>
+
+            <table>
+                <tr>
+                    <th>Nama</th>
+                    <th>Produk</th>
+                    <th>Jumlah</th>
+                    <th>Total</th>
+                    <th>Aksi</th>
+                </tr>
+                <tr>
+                    <td>Andi</td>
+                    <td>Cupcake</td>
+                    <td>2</td>
+                    <td>Rp20.000</td>
+                    <td>
+                        <a href="#" onclick="switchView('edit-view'); return false;">Edit</a>
+                        |
+                        <a href="#" onclick="return confirm('Yakin mau hapus?')">Hapus</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Siti</td>
+                    <td>Brownie</td>
+                    <td>1</td>
+                    <td>Rp25.000</td>
+                    <td>
+                        <a href="#" onclick="switchView('edit-view'); return false;">Edit</a>
+                        |
+                        <a href="#" onclick="return confirm('Yakin mau hapus?')">Hapus</a>
+                    </td>
+                </tr>
+            </table>
+
+            <a href="#" class="btn-back" onclick="switchView('home-view'); return false;">Tambah Pesanan</a>
+        </div>
+    </div>
+
+    <div id="edit-view" class="view-section">
+        <div class="container">
+            <h1>Edit Pesanan</h1>
+
+            <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Pesanan berhasil diupdate!'); switchView('orders-view');">
+                <input type="text" name="nama" value="Andi" required>
+
+                <select name="produk" required>
+                    <option value="Croissant">Croissant</option>
+                    <option value="Cupcake" selected>Cupcake</option>
+                    <option value="Brownie">Brownie</option>
+                </select>
+
+                <input type="number" name="jumlah" min="1" value="2" required>
+                <br>
+                <button type="submit">Update</button>
+            </form>
+
+            <a href="#" class="btn-back" onclick="switchView('orders-view'); return false;">Kembali</a>
+        </div>
+    </div>
+
+    <script>
+        function switchView(targetViewId) {
+            // Sembunyikan semua section view
+            const views = document.querySelectorAll('.view-section');
+            views.forEach(view => {
+                view.classList.remove('active');
+            });
+
+            // Tampilkan section view yang dituju
+            const activeView = document.getElementById(targetViewId);
+            if (activeView) {
+                activeView.classList.add('active');
+            }
+        }
+    </script>
+
+</body>
+</html>
